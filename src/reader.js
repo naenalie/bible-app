@@ -1,3 +1,5 @@
+// BibleReaderCore - Deep Module satisfying the codebase-design principles.
+// Handles loading chapters from offline cache and online API fallback.
 export class BibleReaderCore {
   constructor(offlineBibleData, fetchApiAdapter) {
     this.offlineBibleData = offlineBibleData;
