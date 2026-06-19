@@ -1,0 +1,1040 @@
+/* styles.css - Scriptura Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* Dark Mode Base Variables */
+  --bg-primary: #0D0D0F;
+  --bg-secondary: #161624;
+  --bg-surface: #1E1E32;
+  --border-color: rgba(201, 169, 166, 0.15);
+  
+  --accent-mauve: #C9A9A6;
+  --accent-soft: #E8D5D3;
+  --text-primary: #F5F0EB;
+  --text-secondary: #A8A4A0;
+  --text-verse: #EDE8E4;
+  --gold-accent: #D4AF7A;
+  
+  /* Highlighter Colors */
+  --hl-yellow: rgba(253, 224, 71, 0.35);
+  --hl-pink: rgba(244, 63, 94, 0.35);
+  --hl-lavender: rgba(168, 85, 247, 0.35);
+  --hl-mint: rgba(52, 211, 153, 0.35);
+  
+  /* Shadow & Transitions */
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-ui: 'Inter', sans-serif;
+  --font-verse: 'Cormorant Garamond', serif;
+}
+
+[data-theme="light"] {
+  /* Light Mode Warm Variables */
+  --bg-primary: #FAF6F0;
+  --bg-secondary: #FFFDF9;
+  --bg-surface: #F3ECE2;
+  --border-color: rgba(142, 114, 110, 0.15);
+  
+  --accent-mauve: #8E6864;
+  --accent-soft: #A37F7B;
+  --text-primary: #2C2623;
+  --text-secondary: #70655E;
+  --text-verse: #3E3531;
+  --gold-accent: #B48E55;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition-smooth);
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+}
+
+/* App Container Layout */
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebar Desktop Navigation */
+aside.sidebar {
+  width: 260px;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: space-between;
+  transition: var(--transition-smooth);
+  z-index: 100;
+}
+
+aside.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+aside.sidebar .logo h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--accent-mauve);
+  letter-spacing: 1px;
+}
+
+aside.sidebar .logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-mauve), var(--gold-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.nav-item button {
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition-smooth);
+}
+
+.nav-item button:hover, .nav-item.active button {
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--accent-mauve);
+}
+
+.nav-item button svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  transition: var(--transition-smooth);
+}
+
+/* Bottom Navigation Bar for Mobile */
+.bottom-nav {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+}
+
+.bottom-nav-item {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  gap: 4px;
+  cursor: pointer;
+  flex: 1;
+  padding: 8px 0;
+}
+
+.bottom-nav-item.active {
+  color: var(--accent-mauve);
+}
+
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Main Content Area */
+main.main-content {
+  flex-grow: 1;
+  height: 100%;
+  overflow-y: auto;
+  padding: 40px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+/* Responsive spacing for Main Content on mobile navigation */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+  aside.sidebar {
+    display: none;
+  }
+  .bottom-nav {
+    display: flex;
+  }
+  main.main-content {
+    padding: 20px 20px 84px 20px;
+  }
+}
+
+/* Views Styles (Routing Container) */
+.view-pane {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.view-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dashboard Panel Cards Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1-fraction);
+  grid-template-areas:
+    "plan plan streak streak"
+    "fact fact fact fact"
+    "verse verse verse verse"
+    "stories stories stories stories";
+  gap: 24px;
+  max-width: 1200px;
+}
+
+@media (min-width: 900px) {
+  .dashboard-grid {
+    grid-template-areas:
+      "verse verse verse plan plan plan"
+      "fact fact streak streak streak streak"
+      "stories stories stories stories stories stories";
+  }
+}
+
+/* Glassmorphism Panel Card Design */
+.panel-card {
+  background: rgba(22, 22, 36, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  color: var(--text-primary);
+  box-shadow: var(--glass-shadow);
+  transition: var(--transition-smooth);
+}
+
+[data-theme="light"] .panel-card {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(142, 114, 110, 0.1);
+}
+
+.panel-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201, 169, 166, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Header greeting */
+.header-greeting {
+  margin-bottom: 32px;
+}
+
+.header-greeting h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--accent-mauve);
+}
+
+.header-greeting p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Verse of the Day Card */
+.verse-card-panel {
+  grid-area: verse;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
+  background: linear-gradient(135deg, rgba(22, 22, 36, 0.8), rgba(40, 30, 45, 0.5));
+}
+
+.verse-card-panel .quote-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-mauve);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.verse-card-panel blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--text-verse);
+  margin-bottom: 16px;
+}
+
+.verse-card-panel cite {
+  font-family: var(--font-ui);
+  font-style: normal;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background-color: var(--accent-mauve);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-soft);
+  transform: scale(1.02);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(201, 169, 166, 0.1);
+  border-color: var(--accent-mauve);
+}
+
+/* Streak Tracker Card */
+.streak-card-panel {
+  grid-area: streak;
+  display: flex;
+  flex-direction: column;
+}
+
+.streak-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.streak-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.streak-fire-icon {
+  font-size: 32px;
+  animation: fireBounce 1.5s infinite alternate;
+}
+
+@keyframes fireBounce {
+  0% { transform: scale(1) rotate(-5deg); }
+  100% { transform: scale(1.15) rotate(5deg); }
+}
+
+.streak-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: auto;
+}
+
+.streak-day-dot {
+  aspect-ratio: 1;
+  background-color: rgba(201, 169, 166, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-smooth);
+}
+
+.streak-day-dot.completed {
+  background-color: var(--accent-mauve);
+  color: var(--bg-primary);
+  border-color: var(--accent-mauve);
+}
+
+/* Study Plan Card */
+.plan-card-panel {
+  grid-area: plan;
+}
+
+.progress-bar-container {
+  height: 8px;
+  background-color: rgba(201, 169, 166, 0.1);
+  border-radius: 4px;
+  width: 100%;
+  margin: 12px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-mauve), var(--gold-accent));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Daily Fact Card */
+.fact-card-panel {
+  grid-area: fact;
+  border-left: 4px solid var(--gold-accent);
+}
+
+/* Stories Carousel Card Section */
+.stories-panel {
+  grid-area: stories;
+}
+
+.stories-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
+}
+
+.stories-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+.stories-carousel::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 3px;
+}
+
+.story-card {
+  min-width: 280px;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.story-card:hover {
+  background: rgba(201, 169, 166, 0.08);
+  border-color: var(--accent-mauve);
+  transform: translateY(-2px);
+}
+
+/* Bible Reader View Split Panel */
+.bible-reader-layout {
+  display: flex;
+  gap: 24px;
+  height: calc(100vh - 150px);
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .bible-reader-layout {
+    flex-direction: column;
+    height: auto;
+  }
+}
+
+.reader-container {
+  flex-grow: 1;
+  background: rgba(22, 22, 36, 0.35);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.reader-header-selectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.select-wrapper select {
+  padding: 10px 36px 10px 16px;
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: var(--transition-smooth);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* Font Settings Panel */
+.reader-settings {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+@media (max-width: 900px) {
+  .reader-settings {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Font Control Dropdown & Buttons */
+.font-pill-btn {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  transition: var(--transition-smooth);
+}
+
+.font-pill-btn:hover {
+  border-color: var(--accent-mauve);
+  color: var(--accent-mauve);
+}
+
+/* Bible Verse Content Styling */
+.bible-content-pane {
+  flex-grow: 1;
+  overflow-y: auto;
+  line-height: 1.7;
+  padding-right: 8px;
+}
+
+.verse-row {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.verse-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.verse-num {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--accent-mauve);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+
+.verse-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verse-text {
+  font-size: 18px;
+  color: var(--text-verse);
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.verse-text-en {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Highlights styling */
+.highlight-yellow { background-color: var(--hl-yellow); }
+.highlight-pink { background-color: var(--hl-pink); }
+.highlight-lavender { background-color: var(--hl-lavender); }
+.highlight-mint { background-color: var(--hl-mint); }
+
+/* Custom Selection Highlight Popover Menu */
+.highlighter-bubble {
+  position: absolute;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  z-index: 1000;
+  animation: scaleUp 0.15s ease-out;
+  pointer-events: auto;
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition-smooth);
+}
+
+.color-dot:hover {
+  transform: scale(1.15);
+  border-color: var(--text-primary);
+}
+
+.dot-yellow { background-color: #fde047; }
+.dot-pink { background-color: #f43f5e; }
+.dot-lavender { background-color: #a855f7; }
+.dot-mint { background-color: #34d199; }
+.dot-clear {
+  background-color: transparent;
+  border: 1.5px dashed var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* Journal Side Panel Drawer */
+.journal-side-panel {
+  width: 320px;
+  background: rgba(22, 22, 36, 0.65);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+}
+
+@media (max-width: 900px) {
+  .journal-side-panel {
+    width: 100%;
+    margin-top: 16px;
+  }
+}
+
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.journal-textarea {
+  flex-grow: 1;
+  width: 100%;
+  height: 180px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  margin-bottom: 16px;
+  transition: var(--transition-smooth);
+}
+
+.journal-textarea:focus {
+  border-color: var(--accent-mauve);
+}
+
+/* Post-Reading Summary & Review Modals */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 500px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--glass-shadow);
+  animation: modalIn 0.3s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Verse Card Generator Preview */
+.verse-card-preview {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Verse Card Styles Options */
+.bg-style-1 {
+  background: linear-gradient(135deg, #130C1A, #251B33, #3B2E4A);
+  color: #EDE8E4;
+}
+.bg-style-2 {
+  background: linear-gradient(135deg, #0D1612, #1C3328, #2E4C3E);
+  color: #EDE8E4;
+}
+.bg-style-3 {
+  background: linear-gradient(135deg, #1C1111, #3C2222, #4D3333);
+  color: #EDE8E4;
+}
+
+.verse-card-preview p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.verse-card-preview span {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-mauve);
+}
+
+/* Meditate Breathing Circle Animation */
+.meditate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px);
+}
+
+.breathing-wrapper {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathing-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 166, 0.4) 0%, rgba(201, 169, 166, 0.05) 70%);
+  border: 1px solid rgba(201, 169, 166, 0.3);
+  animation: breatheCycle 12s infinite ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathing-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 10;
+}
+
+@keyframes breatheCycle {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(201, 169, 166, 0.1);
+  }
+  33% {
+    /* Inhale (4s) */
+    transform: scale(1.6);
+    box-shadow: 0 0 50px rgba(201, 169, 166, 0.4);
+    background-color: rgba(201, 169, 166, 0.6);
+  }
+  66% {
+    /* Hold (4s) */
+    transform: scale(1.6);
+    box-shadow: 0 0 60px rgba(201, 169, 166, 0.5);
+    background-color: rgba(201, 169, 166, 0.6);
+  }
+  /* Exhale (4s) returns to 100% */
+}
+
+/* Sound Toggles Grid */
+.sound-toggle-grid {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.sound-btn {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.sound-btn.active {
+  background-color: var(--accent-mauve);
+  color: var(--bg-primary);
+  border-color: var(--accent-mauve);
+}
+
+/* Study Plans Grid */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.plan-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-mauve);
+}
+
+/* Daily Quiz Q&A Mode */
+.quiz-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  background: rgba(22, 22, 36, 0.45);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+}
+
+.quiz-question-box h3 {
+  font-size: 20px;
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option-btn {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 16px;
+  padding: 16px 20px;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.quiz-option-btn:hover {
+  border-color: var(--accent-mauve);
+  background-color: rgba(201, 169, 166, 0.05);
+}
+
+.quiz-option-btn.correct {
+  background-color: rgba(52, 211, 153, 0.2);
+  border-color: #34d199;
+}
+
+.quiz-option-btn.incorrect {
+  background-color: rgba(244, 63, 94, 0.2);
+  border-color: #f43f5e;
+}
+
+/* Journal History View */
+.journal-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.journal-history-item {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.journal-item-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.journal-item-ref {
+  font-weight: bold;
+  color: var(--accent-mauve);
+}
+
+.journal-item-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.journal-item-body {
+  font-size: 14px;
+  line-height: 1.6;
+}

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scriptura — Pendamping Devotional Alkitab</title>
+  <meta name="description" content="Aplikasi membaca Alkitab & jurnal refleksi harian yang estetik, personal, dan offline-first.">
+  
+  <!-- PWA Support -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0D0D0F">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Desktop -->
+    <aside class="sidebar">
+      <div>
+        <div class="logo">
+          <div class="logo-icon">S</div>
+          <h1>Scriptura</h1>
+        </div>
+        <ul class="nav-links">
+          <li class="nav-item active" data-target="view-dashboard">
+            <button>
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              Dashboard
+            </button>
+          </li>
+          <li class="nav-item" data-target="view-reader">
+            <button>
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              Baca Alkitab
+            </button>
+          </li>
+          <li class="nav-item" data-target="view-plans">
+            <button>
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              Study Plans
+            </button>
+          </li>
+          <li class="nav-item" data-target="view-journals">
+            <button>
+              <svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              Bible Journal
+            </button>
+          </li>
+          <li class="nav-item" data-target="view-meditate">
+            <button>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+              Meditasi
+            </button>
+          </li>
+          <li class="nav-item" data-target="view-quiz">
+            <button>
+              <svg viewBox="0 0 24 24"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line><circle cx="12" cy="12" r="10"></circle></svg>
+              Daily Quiz
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- Theme Toggle Switch -->
+        <button class="btn btn-secondary" id="theme-toggle-btn" style="width:100%; justify-content:center;">
+          🌓 Switch Theme
+        </button>
+      </div>
+    </aside>
+
+    <!-- Bottom Navigation for Mobile Devices -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav-item active" data-target="view-dashboard">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        <span>Home</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-reader">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Baca</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-plans">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect></svg>
+        <span>Plans</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-journals">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Journal</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-meditate">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>
+        <span>Meditasi</span>
+      </button>
+      <button class="bottom-nav-item" data-target="view-quiz">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path></svg>
+        <span>Quiz</span>
+      </button>
+    </nav>
+
+    <!-- Main View Section -->
+    <main class="main-content">
+      <!-- 1. DASHBOARD VIEW -->
+      <section id="view-dashboard" class="view-pane active">
+        <div class="header-greeting">
+          <h2 id="greeting-text">Halo, Gwendeline</h2>
+          <p id="dashboard-date">Jumat, 19 Juni 2026</p>
+        </div>
+        
+        <div class="dashboard-grid">
+          <!-- Verse Card Panel -->
+          <div class="panel-card verse-card-panel">
+            <div>
+              <div class="quote-label">Daily Verse</div>
+              <blockquote id="daily-verse-text">"Sebab Aku ini mengetahui rancangan-rancangan apa yang ada pada-Ku mengenai kamu, demikianlah firman TUHAN..."</blockquote>
+              <cite id="daily-verse-ref">Yeremia 29:11</cite>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary" id="btn-read-daily">Baca Pasal</button>
+              <button class="btn btn-secondary" id="btn-generate-card">Verse Card</button>
+            </div>
+          </div>
+
+          <!-- Streak Tracker Panel -->
+          <div class="panel-card streak-card-panel">
+            <div class="streak-header">
+              <h3>Streak Bacaan</h3>
+              <div class="streak-count">
+                <span class="streak-fire-icon">🔥</span>
+                <span id="streak-count-num" style="font-size:24px; font-weight:bold;">0 Hari</span>
+              </div>
+            </div>
+            <p style="color:var(--text-secondary); font-size:13px; margin-bottom:16px;">
+              Membaca Alkitab melatih hati kita. Ayo jaga nyala apinya!
+            </p>
+            <div class="streak-days-grid" id="streak-calendar-grid">
+              <!-- Render 7 days dynamically -->
+            </div>
+          </div>
+
+          <!-- Active Study Plan Panel -->
+          <div class="panel-card plan-card-panel" id="dashboard-plan-card">
+            <h3>Study Plan Aktif</h3>
+            <p id="dashboard-plan-title" style="font-weight:bold; margin-top:8px;">Belum Ada Rencana Aktif</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar" id="dashboard-plan-progress"></div>
+            </div>
+            <p id="dashboard-plan-desc" style="color:var(--text-secondary); font-size:13px;">Pilih rencana belajar di tab Study Plans untuk memulai pelacakan.</p>
+            <button class="btn btn-secondary" style="margin-top:16px;" id="btn-go-to-plans">Pilih Rencana</button>
+          </div>
+
+          <!-- Daily Fact Card -->
+          <div class="panel-card fact-card-panel">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+              <span style="font-size:20px;">💡</span>
+              <h4 style="color:var(--gold-accent); text-transform:uppercase; font-size:12px; letter-spacing:1px;">Bible Fact of the Day</h4>
+            </div>
+            <p id="daily-fact-text" style="font-size:14px; line-height:1.5; font-style:italic; color:var(--text-verse);">
+              Alkitab ditulis dalam rentang 1500 tahun oleh sekitar 40 penulis berbeda...
+            </p>
+          </div>
+
+          <!-- Bible Stories Panel -->
+          <div class="panel-card stories-panel">
+            <h3 style="margin-bottom:16px;">Kisah Alkitab Pilihan</h3>
+            <div class="stories-carousel" id="stories-carousel-container">
+              <!-- Stories rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. BIBLE READER VIEW -->
+      <section id="view-reader" class="view-pane">
+        <div class="bible-reader-layout">
+          <!-- Scripture Container -->
+          <div class="reader-container">
+            <div class="reader-header-selectors">
+              <!-- Book Select -->
+              <div class="select-wrapper">
+                <select id="reader-book-select">
+                  <!-- Books loaded dynamically -->
+                </select>
+              </div>
+              
+              <!-- Chapter Select -->
+              <div class="select-wrapper">
+                <select id="reader-chapter-select">
+                  <!-- Chapters loaded dynamically -->
+                </select>
+              </div>
+
+              <!-- Bilingual Switch -->
+              <button class="btn btn-secondary" id="reader-bilingual-btn">
+                Bilingual (TB & EN): ON
+              </button>
+
+              <!-- Reader Font Settings -->
+              <div class="reader-settings">
+                <div class="select-wrapper">
+                  <select id="reader-font-family">
+                    <option value="'Cormorant Garamond', serif">Cormorant</option>
+                    <option value="'Merriweather', serif">Merriweather</option>
+                    <option value="'Playfair Display', serif">Playfair</option>
+                    <option value="'Inter', sans-serif">Inter</option>
+                  </select>
+                </div>
+                <button class="font-pill-btn" id="font-decrease-btn">A-</button>
+                <button class="font-pill-btn" id="font-increase-btn">A+</button>
+              </div>
+            </div>
+
+            <!-- Bible Text Pane -->
+            <div class="bible-content-pane" id="bible-verses-display">
+              <!-- Verses rendered here -->
+            </div>
+            
+            <!-- Complete Reading Action -->
+            <div style="margin-top:20px; display:flex; justify-content:flex-end;">
+              <button class="btn btn-primary" id="btn-finish-reading">Selesai Membaca</button>
+            </div>
+          </div>
+
+          <!-- Floating/Side Journaling Card -->
+          <div class="journal-side-panel" id="side-journal-panel">
+            <div class="journal-header">
+              <h3 style="font-size:16px;">Refleksi & Jurnal</h3>
+              <span id="journal-saved-status" style="font-size:11px; color:var(--text-secondary);">Tersimpan</span>
+            </div>
+            <p id="journal-chapter-label" style="font-size:12px; color:var(--accent-mauve); font-weight:bold; margin-bottom:12px;">Kejadian 1</p>
+            <textarea class="journal-textarea" id="journal-input" placeholder="Tuliskan pelajaran rohani, perasaan, atau doa yang lahir dari pasal ini..."></textarea>
+            
+            <h4 style="font-size:12px; margin-bottom:8px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px;">Highlight dalam Pasal</h4>
+            <div id="journal-highlights-list" style="font-size:12px; max-height:100px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
+              <!-- Highlights printed here -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. STUDY PLANS VIEW -->
+      <section id="view-plans" class="view-pane">
+        <h2 class="header-greeting" style="font-family:'Cormorant Garamond', serif; font-size:32px;">Study Plans</h2>
+        <p style="color:var(--text-secondary); margin-bottom:24px;">Pilih rencana bacaan bertema untuk memandu pembelajaran Anda.</p>
+        <div class="plans-grid" id="plans-container">
+          <!-- Plans rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- 4. BIBLE JOURNAL VIEW -->
+      <section id="view-journals" class="view-pane">
+        <h2 class="header-greeting" style="font-family:'Cormorant Garamond', serif; font-size:32px;">Riwayat Jurnaling</h2>
+        <p style="color:var(--text-secondary); margin-bottom:24px;">Refleksi, berkat, dan doa yang sudah Anda tulis dari waktu ke waktu.</p>
+        <div class="journal-history-list" id="journal-history-container">
+          <!-- Journal history loaded dynamically -->
+        </div>
+      </section>
+
+      <!-- 5. MEDITATION VIEW -->
+      <section id="view-meditate" class="view-pane">
+        <div class="meditate-container">
+          <h2 style="font-family:'Cormorant Garamond', serif; font-size:36px; margin-bottom:12px; text-align:center;">Saat Teduh & Meditasi</h2>
+          <p style="color:var(--text-secondary); margin-bottom:40px; text-align:center; max-width:500px;">Bernapaslah perlahan. Tenangkan pikiran Anda sebelum merenungkan firman Tuhan.</p>
+          
+          <div class="breathing-wrapper">
+            <div class="breathing-circle">
+              <span class="breathing-text" id="breathing-status-text">Tarik Napas</span>
+            </div>
+          </div>
+
+          <div style="text-align:center;">
+            <p style="font-size:14px; margin-bottom:12px; color:var(--text-secondary);">Musik Latar Belakang</p>
+            <div class="sound-toggle-grid">
+              <button class="sound-btn" data-sound="rain">🌧️ Hujan Hutan</button>
+              <button class="sound-btn" data-sound="piano">🎹 Piano Teduh</button>
+              <button class="sound-btn" data-sound="ocean">🌊 Deburan Ombak</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. DAILY QUIZ VIEW -->
+      <section id="view-quiz" class="view-pane">
+        <div class="quiz-wrapper">
+          <h2 style="font-family:'Cormorant Garamond', serif; font-size:32px; margin-bottom:12px; text-align:center;">Daily Trivia Quiz</h2>
+          <div id="quiz-content-box">
+            <!-- Quiz loaded dynamically based on yesterday's reading -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- HIGHLIGHTER POPUP BUBBLE (Moves dynamically on selection) -->
+    <div class="highlighter-bubble" id="highlighter-popup" style="display:none;">
+      <div class="color-dot dot-yellow" data-color="yellow"></div>
+      <div class="color-dot dot-pink" data-color="pink"></div>
+      <div class="color-dot dot-lavender" data-color="lavender"></div>
+      <div class="color-dot dot-mint" data-color="mint"></div>
+      <div class="color-dot dot-clear" data-color="clear">❌</div>
+    </div>
+
+    <!-- POST-READ SUMMARY MODAL -->
+    <div class="modal-overlay" id="summary-modal">
+      <div class="modal-card">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:24px; color:var(--accent-mauve); margin-bottom:12px;">Sesi Membaca Selesai! 🎉</h3>
+        <p style="font-size:14px; color:var(--text-secondary); margin-bottom:20px;">Hebat! Anda telah menyelesaikan bacaan Anda. Berikut adalah ringkasan singkat dari apa yang baru saja Anda renungkan:</p>
+        
+        <div style="background-color:var(--bg-primary); border-radius:12px; padding:16px; margin-bottom:20px; border-left:3px solid var(--accent-mauve);">
+          <p id="modal-summary-content" style="font-size:14px; line-height:1.6; font-style:italic;">
+            Rangkuman sedang dihasilkan...
+          </p>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+          <button class="btn btn-secondary" id="btn-close-summary-modal">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERSE CARD GENERATOR MODAL -->
+    <div class="modal-overlay" id="verse-card-modal">
+      <div class="modal-card" style="max-width:400px;">
+        <h3 style="font-family:'Cormorant Garamond', serif; font-size:22px; margin-bottom:16px; text-align:center;">Verse Card Generator</h3>
+        
+        <!-- Preview Container -->
+        <div class="verse-card-preview bg-style-1" id="card-preview-container">
+          <p id="card-preview-text">"TUHAN adalah gembalaku..."</p>
+          <span id="card-preview-ref">Mazmur 23:1</span>
+        </div>
+
+        <div style="margin-bottom:16px; display:flex; justify-content:center; gap:8px;">
+          <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" data-style="1">Lembayung</button>
+          <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" data-style="2">Muria</button>
+          <button class="btn btn-secondary" style="padding:6px 12px; font-size:12px;" data-style="3">Senja</button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; gap:12px;">
+          <button class="btn btn-secondary" id="btn-close-card-modal">Batal</button>
+          <button class="btn btn-primary" id="btn-download-card">Unduh Gambar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio synthesizers for meditation ambient (Fallback to HTML5 Audio API oscillators for offline purity) -->
+  <audio id="audio-rain" loop src="https://assets.mixkit.co/active_storage/sfx/2530/2530-84.wav"></audio>
+  <audio id="audio-piano" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio> <!-- Lightweight ambient placeholder -->
+
+  <!-- App Core JS -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
